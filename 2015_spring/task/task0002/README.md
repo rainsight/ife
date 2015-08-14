@@ -4,14 +4,12 @@
 
 ## 任务目的
 
-掌握`JavaScript`基础知识，能够使用`JavaScript`编写一些复杂度不大的交互功能。
+- 掌握`JavaScript`基础知识，能够使用`JavaScript`编写一些复杂度不大的交互功能。
+- 由于时间有限，省略ajax、正则表达式、递归相关内容，请大家课后自行完成。
 
-## 任务Review截止时间
+## 任务所需时间
 
-超过以下天数提交的代码不做Review
-
-- 初级班：**13**天
-- 中级班：**7**天
+5天
 
 ## 参考资料
 
@@ -143,8 +141,8 @@ function isFunction(fn) {
 - 了解值类型和引用类型的区别，了解各种对象的读取、遍历方式，并在`util.js`中实现以下方法：
 
 ```javascript
-// 使用递归来实现一个深度克隆，可以复制一个目标对象，返回一个完整拷贝
-// 被复制的对象类型会被限制为数字、字符串、布尔、日期、数组、Object对象。不会包含函数、正则对象等
+// 不使用递归，实现一个对象克隆，可以复制一个目标对象，返回一个完整拷贝
+// 被复制的对象属性类型会被限制为数字、字符串、布尔、数组。
 function cloneObject(src) {
     // your implement
 }
@@ -152,22 +150,21 @@ function cloneObject(src) {
 // 测试用例：
 var srcObj = {
     a: 1,
-    b: {
-        b1: ["hello", "hi"],
-        b2: "JavaScript"
-    }
+    b: ["hello", "hi"],
+    c: "JavaScript"
 };
 var abObj = srcObj;
 var tarObj = cloneObject(srcObj);
 
 srcObj.a = 2;
-srcObj.b.b1[0] = "Hello";
+srcObj.b[0] = "Hello";
 
-console.log(abObj.a);
-console.log(abObj.b.b1[0]);
+console.log(abObj.a);       // 2
+console.log(abObj.b[0]);    // "Hello"
 
 console.log(tarObj.a);      // 1
-console.log(tarObj.b.b1[0]);    // "hello"
+console.log(tarObj.b[0]);   // "hello"
+console.log(tarObj.c);      // "Javascript"
 ```
 
 - 学习数组、字符串、数字等相关方法，在`util.js`中实现以下函数
@@ -191,13 +188,6 @@ function simpleTrim(str) {
     // your implement
 }
 
-// 很多同学肯定对于上面的代码看不下去，接下来，我们真正实现一个trim
-// 对字符串头尾进行空格字符的去除、包括全角半角空格、Tab等，返回一个字符串
-// 尝试使用一行简洁的正则表达式完成该题目
-function trim(str) {
-    // your implement
-}
-
 // 使用示例
 var str = '   hi!  ';
 str = trim(str);
@@ -212,8 +202,8 @@ function each(arr, fn) {
 
 // 使用示例
 var arr = ['java', 'c', 'php', 'html'];
-function output(item) {
-    console.log(item)
+function output(item, index) {
+    console.log(item);
 }
 each(arr, output);  // java, c, php, html
 
@@ -240,19 +230,6 @@ console.log(getObjectLength(obj)); // 3
 
 ```
 
-- 学习正则表达式，在`util.js`完成以下代码
-
-```
-// 判断是否为邮箱地址
-function isEmail(emailStr) {
-    // your implement
-}
-
-// 判断是否为手机号
-function isMobilePhone(phone) {
-    // your implement
-}
-```
 
 ### 2.2 期望达成
 
@@ -536,49 +513,6 @@ function getCookie(cookieName) {
 
 - [w3school](http://w3school.com.cn/js/js_window.asp)
 
-## 6. Ajax
-
-### 6.1 任务描述
-
-学习Ajax，并尝试自己封装一个Ajax方法。实现如下方法：
-
-```javascript
-// 
-function ajax(url, options) {
-    // your implement
-}
-
-// 使用示例：
-ajax(
-    'http://localhost:8080/server/ajaxtest', 
-    {
-        data: {
-            name: 'simon',
-            password: '123456'
-        },
-        onsuccess: function (responseText, xhr) {
-            console.log(responseText);
-        }
-    }
-);
-```
-
-options是一个对象，里面可以包括的参数为：
-
-- type: `post`或者`get`，可以有一个默认值
-- data: 发送的数据，为一个键值对象或者为一个用&连接的赋值字符串
-- onsuccess: 成功时的调用函数
-- onfail: 失败时的调用函数
-
-### 6.2 期望达成
-
-- 掌握Ajax的实现方式
-
-### 6.3 参考资料
-
-- [w3school](http://www.w3school.com.cn/ajax/)
-- [Comet](http://www.ibm.com/developerworks/cn/web/wa-lo-comet/)
-
 ## 小练习1
 
 ### 任务描述
@@ -593,7 +527,7 @@ options是一个对象，里面可以包括的参数为：
 
 **第二阶段**
 
-单行变成多行输入框，一个按钮，输入框中用来输入用户的兴趣爱好，允许用户用换行、空格（全角/半角）、逗号（全角/半角）、顿号、分号来作为不同爱好的分隔。
+允许用户用空格（全角/半角）、逗号（全角/半角）、顿号、分号来作为不同爱好的分隔。
 
 当点击按钮时的行为同上
 
@@ -609,9 +543,9 @@ options是一个对象，里面可以包括的参数为：
 
 在和上一任务同一目录下面创建一个`task0002_2.html`文件，在`js`目录中创建`task0002_2.js`，并在其中编码，实现一个倒计时功能。
 
-- 界面首先有一个文本输入框，允许按照特定的格式`YYYY-MM-DD`输入年月日；
-- 输入框旁有一个按钮，点击按钮后，计算当前距离输入的日期的00:00:00有多少时间差
-- 在页面中显示，距离YYYY年MM月DD日还有XX天XX小时XX分XX秒
+- 界面首先有一个文本输入框，允许按照特定的格式`YYYY-MM-DD`输入年月日(不做日期格式校验)
+- 输入框旁有一个按钮，点击按钮后，计算当前距离输入的日期有多少时间差
+- 在页面中显示，距离YYYY年MM月DD日还有XX秒
 - 每一秒钟更新倒计时上显示的数
 - 如果时差为0，则倒计时停止
 
@@ -622,50 +556,15 @@ options是一个对象，里面可以包括的参数为：
 在和上一任务同一目录下面创建一个`task0002_3.html`文件，在`js`目录中创建`task0002_3.js`，并在其中编码，实现一个轮播图的功能。
 
 - 图片数量及URL均在HTML中写好
-- 可以配置轮播的顺序（正序、逆序）、是否循环、间隔时长
-- 图片切换的动画要流畅
+
+**第一阶段**
+
 - 在轮播图下方自动生成对应图片的小点，点击小点，轮播图自动动画切换到对应的图片
+- 图片切换的动画要流畅
+
+**第二阶段**
+
+- 实现定时轮播效果
+- 可以配置轮播的顺序（正序、逆序）、是否循环、间隔时长
 
 效果示例：[http://echarts.baidu.com/](http://echarts.baidu.com/) 上面的轮播图（不需要做左右两个箭头）
-
-## 小练习4：输入提示框
-
-在和上一任务同一目录下面创建一个`task0002_4.html`文件，在`js`目录中创建`task0002_4.js`，并在其中编码，实现一个类似百度搜索框的输入提示的功能。
-
-要求如下：
-
-- 允许使用鼠标点击选中提示栏中的某个选项
-- 允许使用键盘上下键来选中提示栏中的某个选项，回车确认选中
-- 选中后，提示内容变更到输入框中
-
-**初级班：**
-
-- 不要求和后端交互，可以自己伪造一份提示数据例如：
-
-```
-var suggestData = ['Simon', 'Erik', 'Kener'];
-```
-
-**中级班：**
-
-- 自己搭建一个后端Server，使用Ajax来获取提示数据
-
-示例：
-
-![示例](img/task0002_sug.png)
-
-## 小练习5：界面拖拽交互
-
-- 实现一个可拖拽交互的界面
-- 如示例图，左右两侧各有一个容器，里面的选项可以通过拖拽来左右移动
-- 被选择拖拽的容器在拖拽过程后，在原容器中消失，跟随鼠标移动
-- 注意拖拽释放后，要添加到准确的位置
-- 拖拽到什么位置认为是可以添加到新容器的规则自己定
-- 注意交互中良好的用户体验和使用引导
-
-![示例](img/task0002_drag.png)
-
-## 任务提交方式
-
-- 初级班同学请在[这里](https://github.com/baidu-ife/ife/issues/766)，按要求回复您的task0002的Github地址。
-- 中级班同学请在[这里](https://github.com/baidu-ife/ife/issues/765)，按要求回复您的task0002的Github地址。
